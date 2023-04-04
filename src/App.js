@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DeleteButton from "./Components/DeleteButton";
+import DeleteButton from "./Components/DeleteBtn/DeleteButton";
 
 function App() {
   const [data, setData] = useState([

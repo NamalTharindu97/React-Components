@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
 import "./App.css";
 
 const DeleteButton = ({ onDelete }) => {
@@ -7,9 +8,10 @@ const DeleteButton = ({ onDelete }) => {
   const handleClick = () => {
     setShowConfirm(true);
   };
+
   const handleConfirmYes = () => {
-    onDelete();
     setShowConfirm(false);
+    onDelete();
   };
 
   const handleConfirmNo = () => {
@@ -19,7 +21,17 @@ const DeleteButton = ({ onDelete }) => {
   return (
     <div>
       <button onClick={handleClick}>delete</button>
-      {showConfirm && (
+      <CSSTransition
+        in={showConfirm}
+        timeout={700}
+        classNames={{
+          enter: "fade-enter",
+          enterActive: "fade-enter-active",
+          exit: "fade-exit",
+          exitActive: "fade-exit-active",
+        }}
+        unmountOnExit
+      >
         <div className="confirm-container">
           <div className="confirm-dialog">
             <p>Are you sure you want to delete?</p>
@@ -29,7 +41,7 @@ const DeleteButton = ({ onDelete }) => {
             </div>
           </div>
         </div>
-      )}
+      </CSSTransition>
     </div>
   );
 };
